@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using IIT_2nd_Assignment_admur13.Models;
+using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Mvc;
 
@@ -40,41 +41,67 @@ namespace IIT_2nd_Assignment_admur13.Controllers
 
         // GET: /Users/UsersList/
         [HttpGet]
+        [Authorize]
         public IActionResult UsersList()
         {
-            // if it succeeds, sends you to the UsersList page.
-            if (HttpContext.User.GetUserId() != null)
-            {
-                List<ApplicationUser> users = _userManager.Users.ToList();
-                return View(users);
-            }
-            else // Redirects one to the home page.
-            {
-                return RedirectToAction("Index", "Home");
-            }
+            List<ApplicationUser> users = _userManager.Users.ToList();
+            return View(users);
+
         }
 
         // This method is to actually navigate to the Delete screen
         // GET: /Users/DeleteUser/
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> DeleteUser(string id)
         {
-            if (HttpContext.User.GetUserId() != null)
-            {
-                if (id == null)
-                    RedirectToAction("UsersList");
-                var user = await GetCurrentUserAsync();
-                if (id != user.Id)
-                    RedirectToAction("UsersList");
-                return View(user);
-            }
-            else // else go to the home page.
-            {
-                return RedirectToAction("Index", "Home");
-            }
+
+            if (id == null)
+                RedirectToAction("UsersList");
+            var user = await GetCurrentUserAsync();
+            if (id != user.Id)
+                RedirectToAction("UsersList");
+            return View(user);
+
         }
 
         // This method is to actually delete the user
         // POST: /Users/Delete
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Delete(string id)
+        {
+            if (ModelState.IsValid)
+            {
+                if (id == null)
+                {
+                    RedirectToAction("UsersList");
+                }
+
+                ApplicationUser user = await GetCurrentUserAsync();
+
+                if (user.Id == id)
+                {
+                    var logins = user.Logins;
+                    foreach (var login in logins)
+                    {
+                        _appDbContext.UserLogins.Remove(login);
+                    }
+                    await _signInManager.SignOutAsync();
+                    _appDbContext.Users.Remove(user);
+                    await _appDbContext.SaveChangesAsync();
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    return RedirectToAction("UsersList");
+                }
+            }
+            else
+            {
+                return View();
+            }
+        }
+
     }
 }

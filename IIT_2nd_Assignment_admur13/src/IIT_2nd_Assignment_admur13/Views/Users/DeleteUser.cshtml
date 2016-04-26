@@ -2,7 +2,25 @@
 
 
 @{
-    ViewData["Title"] = "User List";
+    ViewData["Title"] = "Delete User";
 }
 
 <h2>@ViewData["Title"].</h2>
+<h3>User will be deleted, are you sure?</h3>
+
+<br/>
+
+<dl class="dl-horizontal">
+    <dd>
+        @Html.DisplayFor(model => model.UserName)
+    </dd>
+</dl>
+@using (Html.BeginForm("Delete","Users", new {id = Model.Id}, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        @Html.ActionLink("Back to List", "UsersList")
+    </div>
+}
