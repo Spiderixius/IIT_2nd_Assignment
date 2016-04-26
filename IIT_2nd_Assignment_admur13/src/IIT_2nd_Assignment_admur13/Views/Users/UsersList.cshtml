@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ApplicationUser>
+    
+@{
+    ViewData["Title"] = "User List";
+}
+
+<h2>@ViewData["Title"].</h2>
+
+<table>
+    <tr>
+        <th> Username</th>
+        <th> Modify User</th>
+    </tr>
+
+    @foreach (var users in Model)
+    {
+        // This if statement makes sure that only the logged in user can edit/delete his/her own account
+        if (User.Identity.Name == users.UserName)
+        {
+            <tr>
+                <td>
+                    @Html.Raw(users.UserName):
+                </td>
+                <td>
+                    @Html.ActionLink("Edit User", "Index", "Manage", new {id = users.Id}, null) < or >
+                </td>
+                <td>
+                    @Html.ActionLink("Delete User", "DeleteUser", "Users", new {id = users.Id}, null)
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td>
+                    @Html.Raw(users.UserName):
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+
+<p>
+    @Html.ActionLink("Register a new User!", "Register", "Account")
+</p>
