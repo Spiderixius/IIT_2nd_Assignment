@@ -21,9 +21,9 @@ namespace IIT_2nd_Assignment_admur13.ViewModels.Gallery
 
         // For the image
         [Required]
-        [FileExtensions(Extensions = "png,jpg,jpeg,gif,PNG,JPG,JPEG,GIF")]
+        [FileExtensions(Extensions = "png,jpg,jpeg,gif,bnp,ico svg,PNG,JPG,JPEG,GIF,BNP,SVG,ICO")]
         [Display(Name = "Image")]
-        public IFormFile File { get; set; }
+        public IFormFile Image { get; set; }
 
     }
 }

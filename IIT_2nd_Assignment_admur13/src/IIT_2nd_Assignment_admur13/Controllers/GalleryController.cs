@@ -14,6 +14,11 @@ namespace IIT_2nd_Assignment_admur13.Controllers
     {
         private readonly ApplicationDbContext _appDbContext;
 
+        public GalleryController(ApplicationDbContext appDbContext)
+        {
+            _appDbContext = appDbContext;
+        }
+
         // GET: /Gallery/Gallery
         [HttpGet]
         [Authorize]
@@ -23,5 +28,14 @@ namespace IIT_2nd_Assignment_admur13.Controllers
             return View(imgModels);
 
         }
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult ShowUpload()
+        {
+            return View("UploadImage");
+        }
+
+
     }
 }
