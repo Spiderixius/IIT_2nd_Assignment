@@ -785,7 +785,7 @@ $.extend( $.validator, {
 			} else {
 				// create error element
 				error = $( "<" + this.settings.errorElement + ">" )
-					.attr( "id", elementID + "-error" )
+					.attr( "Id", elementID + "-error" )
 					.addClass( this.settings.errorClass )
 					.html( message || "" );
 
@@ -812,7 +812,7 @@ $.extend( $.validator, {
 					// If the element is not a child of an associated label, then it's necessary
 					// to explicitly apply aria-describedby
 
-					errorID = error.attr( "id" ).replace( /(:|\.|\[|\]|\$)/g, "\\$1");
+					errorID = error.attr( "Id" ).replace( /(:|\.|\[|\]|\$)/g, "\\$1");
 					// Respect existing non-error aria-describedby
 					if ( !describedBy ) {
 						describedBy = errorID;
@@ -828,7 +828,7 @@ $.extend( $.validator, {
 						$.each( this.groups, function( name, testgroup ) {
 							if ( testgroup === group ) {
 								$( "[name='" + name + "']", this.currentForm )
-									.attr( "aria-describedby", error.attr( "id" ) );
+									.attr( "aria-describedby", error.attr( "Id" ) );
 							}
 						});
 					}

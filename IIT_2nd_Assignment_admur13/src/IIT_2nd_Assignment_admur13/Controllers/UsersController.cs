@@ -33,7 +33,7 @@ namespace IIT_2nd_Assignment_admur13.Controllers
             _appDbContext = appDbContext;
         }
 
-        // Here I check id with the logged in user and the user I want to modify
+        // Here I check Id with the logged in user and the user I want to modify
         private async Task<ApplicationUser> GetCurrentUserAsync()
         {
             return await _userManager.FindByIdAsync(HttpContext.User.GetUserId());
