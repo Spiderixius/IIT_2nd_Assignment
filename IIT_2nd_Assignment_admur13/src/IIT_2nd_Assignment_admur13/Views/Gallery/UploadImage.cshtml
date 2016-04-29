@@ -7,15 +7,15 @@
 
 <h2>@ViewData["Title"].</h2>
 
-<!-- Used password change -->
+<!-- Used ChangePassword.cshtml and just changed around in the names -->
 <form method="POST" asp-action="Upload" asp-controller="Gallery" enctype="multipart/form-data" class="form-horizontal" role="form">
     <h4>Image Name</h4>
-    <hr />
+    <hr/>
     <div asp-validation-summary="ValidationSummary.All" class="text-danger"></div>
     <div class="form-group">
         <label asp-for="Title" class="col-md-2 control-label"></label>
         <div class="col-md-10">
-            <input asp-for="Title" class="form-control" />
+            <input asp-for="Title" class="form-control"/>
             <span asp-validation-for="Title" class="text-danger"></span>
         </div>
     </div>
@@ -31,5 +31,8 @@
             <button type="submit" class="btn btn-default">Upload Image</button>
         </div>
     </div>
-
 </form>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
