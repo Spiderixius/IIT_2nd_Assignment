@@ -7,11 +7,28 @@
 
 <h2>@ViewData["Title"].</h2>
 
-<!-- http://stackoverflow.com/questions/17952514/mvc-how-to-display-a-byte-array-image-from-model -->
-<div>
+<!-- Code used from http://stackoverflow.com/questions/17952514/mvc-how-to-display-a-byte-array-image-from-model for the reading of bytes from db-->
+
+<!-- Added a container to prevent the footer from being on the same level with the images-->
+<div class="container">
     @foreach (var images in Model)
     {
-        
-    }
+        var base64 = Convert.ToBase64String(images.ImageBytes);
+        var imgSrc = String.Format("data: {0} ;base64,{1}", images.ImageType, base64);
 
+        <div class="col-md-4">
+            <label>Title: </label> @images.Title <br/>
+            <img src="@imgSrc" class="img-thumbnail img-responsive" width="500" height="500"/>
+            <div>
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" value="@images.Id"/>
+                    <br/>
+                    <input type="submit" value="Delete" class="btn btn-default"/>
+                    <br /> <hr/>
+                }
+            </div>
+        </div>
+    }
 </div>
