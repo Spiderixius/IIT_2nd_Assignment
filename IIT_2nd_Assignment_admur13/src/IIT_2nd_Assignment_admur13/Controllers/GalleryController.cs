@@ -76,6 +76,26 @@ namespace IIT_2nd_Assignment_admur13.Controllers
                 return View(model);
             }
         }
+        
+        // Pretty much resued my method of deleting in the UsersController.cs
+        // POST: /Gallery/Delete
+        [HttpPost, ActionName("DeleteImage")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteImage(int id)
+        {
+            try
+            {
+                ImageModel img = _appDbContext.Images.Single(x => x.Id == id);
+                _appDbContext.Images.Remove(img);
+                _appDbContext.SaveChanges();
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return RedirectToAction("Gallery");
+        }
 
 
         /// <summary>

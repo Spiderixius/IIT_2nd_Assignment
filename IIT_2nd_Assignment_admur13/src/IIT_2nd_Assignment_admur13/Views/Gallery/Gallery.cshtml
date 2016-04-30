@@ -1,5 +1,4 @@
-﻿
-@model IEnumerable<ImageModel>
+﻿@model IEnumerable<ImageModel>
 
 @{
     ViewData["Title"] = "Gallery";     
@@ -20,12 +19,14 @@
             <label>Title: </label> @images.Title <br/>
             <img src="@imgSrc" class="img-thumbnail img-responsive" width="500" height="500"/>
             <div>
-                @using (Html.BeginForm())
-                {
+                @using (Html.BeginForm("DeleteImage", "Gallery", new { ImageModel= typeof (ImageModel)}, FormMethod.Post))
+                { 
                     @Html.AntiForgeryToken()
                     <input type="hidden" name="id" value="@images.Id"/>
                     <br/>
-                    <input type="submit" value="Delete" class="btn btn-default"/>
+                    <div>
+                        <input type="submit" value="Delete" class="btn btn-default"/>
+                    </div>
                     <br /> <hr/>
                 }
             </div>
