@@ -11,6 +11,9 @@
 <br/>
 
 <dl class="dl-horizontal">
+    <dt>
+        Username:
+    </dt>
     <dd>
         @Html.DisplayFor(model => model.UserName)
     </dd>
@@ -19,8 +22,34 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-actions no-color">
+    <div class="container">
         <input type="submit" value="Delete" class="btn btn-default" /> |
         @Html.ActionLink("Back to Users List", "UsersList")
     </div>
 }
+
+
+<script>
+
+    function deleteUser() {
+
+        //var name = document.getElementById("loginName").value;
+        //var pass = document.getElementById("loginPassword").value;
+
+        var xhrequest = new XMLHttpRequest();
+        xhrequest.open("POST", "/login", true);
+        xhrequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhrequest.send(JSON.stringify({ "username": name, "password": pass }));
+
+        xhrequest.onreadystatechange = function () {
+            if (xhrequest.readyState == 4 && xhrequest.status == 200) {
+                if (JSON.parse(xhrequest.responseText).value) {
+                    location.replace("/gallery");
+                }
+                else {
+                    document.getElementById("loginText").innerHTML = "Incorrect password";
+                }
+            }
+        }
+    }
+</script>

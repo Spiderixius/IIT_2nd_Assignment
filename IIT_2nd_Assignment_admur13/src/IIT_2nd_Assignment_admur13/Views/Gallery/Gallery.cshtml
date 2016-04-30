@@ -8,14 +8,18 @@
 
 <!-- Code used from http://stackoverflow.com/questions/17952514/mvc-how-to-display-a-byte-array-image-from-model for the reading of bytes from db-->
 
-<!-- Added a container to prevent the footer from being on the same level with the images-->
+<!-- Added a container to prevent the footer from being on the same level with the images
+    Also http://www.w3schools.com/bootstrap/bootstrap_grid_basic.asp for HTML/CSS inspiration.
+-->
+
+
 <div class="container">
     @foreach (var images in Model)
     {
         var base64 = Convert.ToBase64String(images.ImageBytes);
         var imgSrc = String.Format("data: {0} ;base64,{1}", images.ImageType, base64);
 
-        <div class="col-md-4">
+        <div class="col-sm-6">
             <label>Title: </label> @images.Title <br/>
             <!-- http://www.w3schools.com/bootstrap/bootstrap_images.asp -->
             <img src="@imgSrc" class="img-rounded img-responsive img-responsive-16by9" style="width: 400px; height: 300px"/>
