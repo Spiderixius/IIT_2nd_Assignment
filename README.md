@@ -1,12 +1,13 @@
 *********************************
 *********************************								
 *********************************								
-********	  READ ME!  	*********			
+********  READ ME       *********			
 *********************************								
 *********************************							
 *********************************
-//!!!!!// If you are here just for the USERNAME & PASSWORD you can stop reading, simply register
-a new user and start exploring my mini gallery website.
+//!!!!!// If you are here just for the USERNAME & PASSWORD scroll all the way to the bottom or
+simply register a new user and start exploring my mini gallery website.
+
 
 Hello reader. This readme file is seperated into three sections:
 • Project Description
@@ -14,6 +15,7 @@ Hello reader. This readme file is seperated into three sections:
 • How to Run
 	• Contains information about how to run
 • Testing
+• Username & Password
 
 
 
@@ -27,7 +29,7 @@ created using the existing code as inspiration.
 
 
 //////////////////////////////////
-//		  Project Description 		//
+//	Project Description 	//
 //////////////////////////////////
 
 This project is based on the required features as shown below.
@@ -67,16 +69,26 @@ Extra feature:
 
 
 //////////////////////////////////
-//		    	How to Run	    		//
+//		How to Run	//
 //////////////////////////////////
 
 Build and run in Visual Studio. Don't forget to use dnx to update the database. Otherwise when you try
 to register it will tell you to apply migrations which worked for me but I have read that it is not always
 that it works.
 
+Also the database file is also provided with the name: 
+aspnet5-IIT_2nd_Assignment_admur13-f4a042b8-986b-4a62-bd7a-a2c918e03be5
+
 
 //////////////////////////////////
-//			  Testing			//
+//	 Testing		//
 //////////////////////////////////
 
-• Website was tested in Chrome, Chromium, Firefox. 
+Website was tested in Chrome, Chromium, Firefox. 
+
+//////////////////////////////////
+//	 Username & Password	//
+//////////////////////////////////
+
+Username: admur13@gmail.com
+Password: 53938/Account/Register
