@@ -67,8 +67,9 @@ namespace IIT_2nd_Assignment_admur13.Controllers
 
         // This method is to actually delete the user
         // POST: /Users/Delete
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<ActionResult> Delete(string id)
         {
             if (ModelState.IsValid)

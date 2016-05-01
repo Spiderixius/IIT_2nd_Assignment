@@ -18,7 +18,9 @@
         @Html.DisplayFor(model => model.UserName)
     </dd>
 </dl>
-@using (Html.BeginForm("Delete","Users", new {id = Model.Id}, FormMethod.Post))
+
+<!-- Without Ajax -->
+@*@using (Html.BeginForm("Delete","Users", new {id = Model.Id}, FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -26,30 +28,34 @@
         <input type="submit" value="Delete" class="btn btn-default" /> |
         @Html.ActionLink("Back to Users List", "UsersList")
     </div>
-}
+}*@
 
+<div>
+    <input type="hidden" name="id" id="userid" value="@Model.Id"/>
+    <input type="submit" id="delete" value="Delete" class="btn btn-default"/> |
+
+</div>
+<div id="error" class="danger"></div>
 
 <script>
+    document.getElementById("delete").addEventListener("click", deleteUser);
 
     function deleteUser() {
+        var id = document.getElementById("userid").value;
+        var xmlhttp = new XMLHttpRequest();
 
-        //var name = document.getElementById("loginName").value;
-        //var pass = document.getElementById("loginPassword").value;
+        xmlhttp.open("POST", '@Url.Action("Delete", "Users")/' + id, true);
+        xmlhttp.send();
 
-        var xhrequest = new XMLHttpRequest();
-        xhrequest.open("POST", "/login", true);
-        xhrequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhrequest.send(JSON.stringify({ "username": name, "password": pass }));
+        xmlhttp.onreadystatechange = function () {
 
-        xhrequest.onreadystatechange = function () {
-            if (xhrequest.readyState == 4 && xhrequest.status == 200) {
-                if (JSON.parse(xhrequest.responseText).value) {
-                    location.replace("/gallery");
-                }
-                else {
-                    document.getElementById("loginText").innerHTML = "Incorrect password";
-                }
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                location.replace("/");
+            } else {
+                document.getElementById("error").innerHTML = "Error, can't delete user.";
             }
-        }
+        };
+        
+
     }
 </script>
